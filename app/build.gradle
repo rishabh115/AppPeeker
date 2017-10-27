@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+
+def keyfile=file("keystore.properties")
+def keyprops=new Properties()
+
+if (keyfile.exists()) {
+    keyprops.load(new FileInputStream(keyfile))
+}
+
+android {
+    compileSdkVersion 26
+
+    defaultConfig {
+        applicationId "com.commonsware.apppeeker"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    if (keyfile.exists()) {
+        signingConfigs {
+            release {
+                keyAlias keyprops['keyAlias']
+                keyPassword keyprops['keyPassword']
+                storeFile file(keyprops['storeFile'])
+                storePassword keyprops['storePassword']
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+        }
+
+        release {
+            minifyEnabled false
+
+            if (keyfile.exists()) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation "com.android.support:recyclerview-v7:26.1.0"
+    implementation "com.android.support.constraint:constraint-layout:1.0.2"
+}
