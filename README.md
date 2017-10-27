@@ -17,6 +17,10 @@ Android 8.1 DP1 &mdash; you should not see
 in the list, and a message at the top will say that the
 method was not called.
 
+A compiled edition of the `1.0.0` release of the app can
+be found [here](https://github.com/commonsguy/AppPeeker/releases/download/v1.0.0/AppPeeker-1.0.0.apk)
+for your sideloading pleasure.
+
 ## Notes
 
 - The app's `minSdkVersion` is 21. You are welcome to fork
